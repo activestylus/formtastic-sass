@@ -1,7 +1,6 @@
 h1. Formtastic Sass Mixins
 
-A few simple, yet powerful macros that add flexible styling
-to your formtastic forms.
+A few simple, yet powerful macros that add flexible styling to your formtastic forms.
 
 h2. Installation
 
@@ -13,8 +12,7 @@ First we will need to install Haml -- Yes even you ERB enthusiasts who wont drin
   haml --rails
 </pre>
 
-Set up a master Sass file and include it in your layout
-Then include this file in that the top of that sheet:
+Set up a master Sass file and include it in your layout, Then include this file in that the top of that sheet:
 
 <pre>
   @import formtastic_base.sass
@@ -66,6 +64,7 @@ Set text alignment of labels (Must be either "left" or "right")
 </pre>
 
 *Note:* Do not mix units (em px %) as it will break the calculations.
+
 Percentages will yield elastic forms.
 
 As for other defaults (color, fonts, etc), the file is well-commented
