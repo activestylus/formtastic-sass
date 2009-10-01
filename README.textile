@@ -1,0 +1,120 @@
+h1. Formtastic Sass Mixins
+
+A few simple, yet powerful macros that add flexible styling
+to your formtastic forms.
+
+h2. Installation
+
+First we will need to install Haml -- Yes even you ERB enthusiasts who wont drink the Haml-Aid need to get on the Sass track if you are serious about productivity and DRYness. Sass kicks ass!
+
+<pre>
+  gem install haml
+  cd my_rails_app
+  haml --rails
+</pre>
+
+Set up a master Sass file and include it in your layout
+Include this file in that the top of that sheet
+
+<pre>
+  @import formtastic_base.sass
+</pre>
+
+Are you ready to churn out beautiful forms in SECONDS?
+
+Let's rock...
+
+h2. Usage and Defaults
+
+You can use the default style like this:
+
+<pre>
+  form.formtastic
+    +formtastic
+</pre>
+
+You can modify the defaults in formtastic_base as follows:
+
+Set width of entire fieldset
+  <pre>
+    !total_width=100%         
+  </pre>
+
+Set label widths and hint/error left margins
+
+<pre>
+  !label_width=24%
+</pre>
+
+Set width of inputs, textareas and selects
+
+<pre>
+  !input_width=70%          
+</pre> 
+
+Set horizontal padding for labels
+
+<pre>
+  !label_pad=2%
+</pre> 
+
+Set text alignment of labels (Must be either "left" or "right")
+
+<pre>
+  !label_float="left"
+</pre>
+
+You can set default colors, fonts and other attributes as well.
+The file is chock full of explanations. 
+
+h2. Inline Customization
+
+In order to set the basic layout, you don't need to even touch the defaults.
+
+<pre>
+  form.formtastic
+    +formtastic(510px,100px,400px,8px,"right")
+</pre>
+
+Fun trick: Compass users can also put Bluepint, 960, YUI grid values in there.
+
+h2. Alternative Inline Order
+
+You can align labels with error messages so they read like sentences.
+
+Create formtastic.rb in config/initializers and add this:
+<pre>
+  Formtastic::SemanticFormBuilder.inline_order = [:errors, :input, :hints]
+</pre>
+
+This is best used with right-aligned labels
+<pre>
+  form.formtastic
+    +formtastic(100%,20%,70%,4%,"right")
+</pre>
+
+You will need to provide a margin-top value to align labels with error messages, trial and error is your friend here:
+
+<pre>
+  form.formtastic
+    +formtastic(100%,20%,70%,4%,"right")
+    +formtastic-errors-on-top(21px)
+</pre>
+
+h2. Hacks
+
+Thanks to the misbehavior of legend tags, a tweaks is needed for Safari. Just set a pixel or em width on the legend's span like this
+
+<pre>
+  form.formtastic 
+    +formtastic
+    +formtastic-safari-hack(120px)
+</pre>
+
+Internet Explorer is not yet supported. Patches are welcome.
+
+h2. Caveat
+
+Overall this is still very alpha so please test across browsers before using in production.
+
+Enjoy!

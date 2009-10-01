@@ -1,0 +1,292 @@
+//--------------------------------------------------------
+// Formtastic Sass Mixin
+//--------------------------------------------------------
+// A quick and flexible way to layout your forms
+// Assumes that you want to float/align your labels and inputs
+// Using percentages will make the form fluid/elastic
+// Warning: Do not mix units (em, px, %) as calculations must be made
+//
+// Set width of entire fieldset
+!total_width=100%         
+//
+// Set label widths and hint/error left margins
+!label_width=24%          
+//
+// Set width of inputs, textareas and selects
+!input_width=70%          
+//
+// Set horizontal padding for labels
+!label_pad=2%
+//
+// Set text alignment of labels (Must be either "left" or "right")
+!label_float="left"       
+//
+// Set widths of all inputs, textareas and selects (all aligned)
+// False will preserve auto width
+!full_width_inputs=true   
+//
+// Installation ------------------------------------------
+//
+//$ sudo gem install haml
+//$ cd rails app
+//$ haml --rails (or merb/sinatra/etc)
+//
+// Set up master Sass file and include it in your html
+// Save this file as _base.sass and include it in master sass like so:
+//
+// @import formtastic_base.sass   
+//
+// Usage -------------------------------------------------
+//
+// form.formtastic
+//   +formtastic
+//
+// Customize ---------------------------------------------
+//
+// form.formtastic
+//   +formtastic(410px,100px,300px,12px,"right",true)
+//                               
+// Note: When using pixel values be sure to pad total width by 10px
+// Still looking for a way to make this cleaner
+//--------------------------------------------------------
+=formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!full_width_inputs)
+  fieldset
+    :width = !total_width
+  ol li
+    label
+      @if !label_float=="left"
+        :padding-left = !label_pad
+        :text-align left
+      @else
+        :padding-right = !label_pad
+        :text-align right
+      :width = !label_width - !label_pad
+    li label
+      @if !label_float=="right"
+        :text-align left
+    fieldset
+      legend
+        :width = !label_width - !label_pad
+        @if !label_float=="left"
+          :padding-left = !label_pad
+        @else
+          :padding-right = !label_pad
+          :text-align right
+        span.label
+          :width = !label_width - !label_pad
+      ol
+        :padding =  0 ( !total_width - (!input_width + !label_width)) 0 !label_width
+    p.inline-hints, p.inline-errors, ul.errors 
+      :margin = 0.5em 0 0 !label_width
+    @if !full_width_inputs
+      &.string input, &.password input, &.numeric input, &.text textarea, select
+        :width = !input_width
+    &.boolean label
+      :padding-left = !label_width
+  fieldset
+    &.buttons
+      :width = !total_width
+      :padding-left = !label_width
+      &.right
+        ol
+          :padding-left 0
+          :width = !input_width
+          li
+            :display inline
+            :float right
+            :width auto
+            :padding-left = !label_pad
+
+//--------------------------------------------------------
+// Formtastic Base (modify at your own risk!)
+//--------------------------------------------------------
+form.formtastic
+  ul, ol, li, fieldset, legend, input, textarea, select, p
+    :margin 0
+    :padding 0
+  em
+    :font-style normal
+    :font-weight normal
+  ol, ul
+    :list-style none
+  abbr, acronym
+    :border 0
+    :font-variant normal
+  input, textarea, select
+    :font-family inherit
+    :font-size inherit
+    :font-weight inherit
+    :font-size 100%
+  ol li
+    :display inline-block
+    :width 100%
+    &:after
+      :content "."
+      :display block
+      :height 0
+      :clear both
+      :visibility hidden
+    label
+      :display block
+      :float left
+    li 
+      :margin-right 8px
+      :float left
+      :padding-left 0
+      :width auto
+      
+      label
+        :line-height 100%      
+        :padding-top 0
+        :margin-right 8px
+      input
+        :line-height 100%
+        :vertical-align middle
+        :margin-top -0.1em
+    fieldset
+      :position relative
+      legend
+        :position absolute
+        :padding-top 0.1em
+        :display block
+        span.label
+          :display block
+          :position absolute
+          :clear both
+          :background transparent
+          abbr
+            :display inline
+      ol
+        :float left
+        :margin 0
+        li
+          :padding 0
+          :border 0
+          :display inline
+    ul.errors
+      :color #cc0000
+      :list-style square
+      li
+        :padding 0
+        :border none
+        :display list-item
+    &.hidden
+      :display none
+    &.boolean label
+      :width auto
+      input
+        :margin 0 0.5em 0 0.2em
+    &.radio, &.check_boxes
+      fieldset ol
+        :margin-bottom -0.6em
+        li
+          :float left
+          :display inline
+          :margin 0.1em 0 0.5em 0
+          label
+            :float none
+            :width auto
+            :padding-left 0px
+            input
+              :margin-right 0.1em
+    &.date, &.time, &.datetime
+      fieldset ol
+        li
+          :float left
+          :margin 0 .3em 0 0
+          label
+            :display none 
+            input
+              :display inline
+              :margin 0
+              :padding 0  
+  fieldset
+    :border 0
+    :display inline-block
+    &.inputs
+      :z-index 99
+    &.buttons
+      :float left
+      :padding-right 0.5em
+    &:after
+      :content "."
+      :display block
+      :height 0
+      :clear both
+      :visibility hidden
+      
+    //--------------------------------------------------------
+    // Formtastic basic Input Styles
+    //--------------------------------------------------------
+    &.inputs
+      // Styling for legends that act as labels on nested fieldset
+      li legend span
+        :font-size 1em
+      // Standard input styling
+      textarea, input
+        :border 1px solid #999
+        :padding 3px
+      .check_boxes, .radio
+        label
+          :cursor pointer
+    
+  //--------------------------------------------------------
+  // Formtastic Colors
+  //--------------------------------------------------------
+  ol li
+    // Wrapper for labels and inputs
+    // Adding horizontal margin/padding with care!
+    :padding 7px 0px
+    &.required
+      input,textarea,select
+        :background-color #fff
+    &.error
+      input,textarea,select
+        :background-color #fcc
+        :border 1px solid #f66
+    &.optional
+      input,textarea,select
+        :background-color #fff
+  p
+    &.inline-errors
+      :color #f00
+    &.inline-hints
+      :color #777
+  // The * after required labels
+  span, label
+    abbr
+      :color #f00
+
+//--------------------------------------------------------
+// Formtastic Errors on top (aligned with label)
+//
+// Create formtastic.rb in config/initializers and add this:
+// Formtastic::SemanticFormBuilder.inline_order = [:errors, :input, :hints]
+// Best used with right-aligned labels
+// +formtastic(100%,20%,70%,4%,"right")
+//--------------------------------------------------------
+=formtastic-errors-on-top(!label_vertical_margin=21px)
+  ol li.error
+    p.inline-errors
+      :margin-top 0px
+    label, span.label
+      :margin-top = "-#{!label_vertical_margin}"
+      :padding-bottom 18px
+    fieldset label
+      :margin-top 0
+      :padding-bottom 0  
+
+//--------------------------------------------------------
+// Hacks
+//--------------------------------------------------------
+// Safari
+// Legend in nested fieldsets tends to misbehave with percentages
+// Set a pixel or em width
+=formtastic-safari-hack(!width=200px)
+  fieldset ol li fieldset
+    legend, legend span
+      :display block
+      :width = !width
+
+// IE6 HACK
+// TODO: Basic fixes to include in separate ie.sass file
