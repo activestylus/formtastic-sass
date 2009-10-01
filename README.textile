@@ -20,7 +20,7 @@ First we will need to install Haml -- Yes even you ERB enthusiasts who wont drin
   @import formtastic_base.sass
 </pre>
 
-If you haven't already, you should also install "Formtastic":http://github.com/justinfrench/formtastic
+If you haven't already, you should also install *"Formtastic":http://github.com/justinfrench/formtastic*
 
 Done! Are you ready to churn out beautiful forms in SECONDS?
 
