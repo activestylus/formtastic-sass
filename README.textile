@@ -88,6 +88,8 @@ In order to set the basic layout, you don't need to even touch the defaults.
 
 Sweet!
 
+*Note:* It's good to give your form !total_width a little leeway (10px or 5% minimum)
+
 h2. Alternative Inline Order
 
 You can align labels with error messages so they read like sentences.
