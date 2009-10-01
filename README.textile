@@ -82,7 +82,7 @@ In order to set the basic layout, you don't need to even touch the defaults.
     +formtastic(510px,100px,400px,8px,"right")
 </pre>
 
-Fun trick: Compass users can also put Bluepint, 960, YUI grid values in there.
+Sweet.
 
 h2. Alternative Inline Order
 
