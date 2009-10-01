@@ -20,20 +20,22 @@ First we will need to install Haml -- Yes even you ERB enthusiasts who wont drin
   @import formtastic_base.sass
 </pre>
 
+If you haven't already, you should also install "Formtastic":http://github.com/justinfrench/formtastic
+
 Done! Are you ready to churn out beautiful forms in SECONDS?
 
 Let's rock...
 
 h2. Usage and Defaults
 
-You can use the default style like this:
+Once you have created semantic forms with formtastic, you can use the default style like this:
 
 <pre>
   form.formtastic
     +formtastic
 </pre>
 
-You can modify the defaults in formtastic_base as follows:
+Defaults can be modified in formtastic_base as follows:
 
 Set width of entire fieldset
 
