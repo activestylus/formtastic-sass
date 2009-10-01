@@ -26,7 +26,7 @@ Done! Are you ready to churn out beautiful forms in SECONDS?
 
 Let's rock...
 
-h2. Usage and Defaults
+h2. Basic Usage
 
 Once you have created semantic forms with formtastic, you can use the default style like this:
 
@@ -35,7 +35,11 @@ Once you have created semantic forms with formtastic, you can use the default st
     +formtastic
 </pre>
 
-Defaults can be modified in formtastic_base as follows:
+Finished! Wow, that was tough - go take a coffee break and come back later :D
+
+h2. Defaults
+
+Can be modified in formtastic_base:
 
 Set width of entire fieldset
 
@@ -82,7 +86,7 @@ In order to set the basic layout, you don't need to even touch the defaults.
     +formtastic(510px,100px,400px,8px,"right")
 </pre>
 
-Sweet.
+Sweet!
 
 h2. Alternative Inline Order
 
