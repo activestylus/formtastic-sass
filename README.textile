@@ -14,7 +14,7 @@ First we will need to install Haml -- Yes even you ERB enthusiasts who wont drin
 </pre>
 
 Set up a master Sass file and include it in your layout
-Include this file in that the top of that sheet
+Then include this file in that the top of that sheet:
 
 <pre>
   @import formtastic_base.sass
