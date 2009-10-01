@@ -65,10 +65,12 @@ Set text alignment of labels (Must be either "left" or "right")
   !label_float="left"
 </pre>
 
-You can set default colors, fonts and other attributes as well.
-The file is chock full of explanations. 
+*Note:* Do not mix units (em px %) as it will break the calculations.
+Percentages will yield elastic forms.
 
-h2. Inline Customization
+As for other defaults (color, fonts, etc), the file is well-commented
+
+h2. The Magic
 
 In order to set the basic layout, you don't need to even touch the defaults.
 
