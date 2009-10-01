@@ -12,13 +12,15 @@ First we will need to install Haml -- Yes even you ERB enthusiasts who wont drin
   haml --rails
 </pre>
 
-Set up a master Sass file and include it in your layout, Then include this file in that the top of that sheet:
+1. Set up a master Sass file and include it in your layout
+2. Drop this file in the same directory as your master.sass
+3. Include this file at the top of that sheet with:
 
 <pre>
   @import formtastic_base.sass
 </pre>
 
-Are you ready to churn out beautiful forms in SECONDS?
+Done! Are you ready to churn out beautiful forms in SECONDS?
 
 Let's rock...
 
