@@ -36,9 +36,10 @@ You can use the default style like this:
 You can modify the defaults in formtastic_base as follows:
 
 Set width of entire fieldset
-  <pre>
-    !total_width=100%         
-  </pre>
+
+<pre>
+  !total_width=100%         
+</pre>
 
 Set label widths and hint/error left margins
 
