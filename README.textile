@@ -76,6 +76,7 @@ Set alignment of labels
 </pre> 
 
 Set alignment of commit buttons ("left" or "right")
+
 <pre>
   !button_float="left"
 </pre>
