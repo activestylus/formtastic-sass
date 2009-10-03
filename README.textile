@@ -127,7 +127,7 @@ The value must be adjusted until label and error message line up.
 
 h2. Hacks
 
-Thanks to the misbehavior of legend tags, a tweaks is needed for Safari. Just set a pixel or em width on the legend's span like this
+Thanks to the misbehavior of legend tags, a tweak is needed for Safari when floating labels. Just set a pixel or em width on the legend's span like this
 
 <pre>
   form.formtastic 
