@@ -70,21 +70,18 @@
     :width = !total_width
   ol li
     label
-      :width = !label_width - !label_pad
       @if !label_float=="clear"
         :display block
         :clear both
         :float none
       @else
+        :float left
+        :width = !label_width - !label_pad
         @if !label_float=="left"
           :padding-left = !label_pad
           :text-align left
-        @if !label_float=="left"
-          :padding-right = !label_pad
-          :text-align right     
-    @if !label_float=="right"
-      li label
-        :text-align left 
+        @else
+          :text-align right 
     fieldset
       legend
         @if !label_float=="clear"
@@ -111,7 +108,7 @@
           :padding 0
         @else
           :padding =  0 ( !total_width - (!input_width + !label_width)) 0 !label_width
-    @if !label_float != "clear"
+    @if !label_float == "clear"
       &.string input, &.password input, &.numeric input, &.text textarea, select
         :width = !input_width
     @else
@@ -124,9 +121,11 @@
         :padding-left = !label_width  
   fieldset
     &.buttons
-      :width = !total_width
-      @if !label_float != "clear"
+      @if !label_float == "clear"
+        :width = !total_width
+      @else
         :padding-left = !label_width
+        :width = !input_width
       @if !button_float == "left"
         ol
           li
