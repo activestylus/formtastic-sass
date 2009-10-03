@@ -41,31 +41,31 @@ h2. Defaults
 
 Can be modified in formtastic_base:
 
-Set width of entire fieldset
+h3. Set width of entire fieldset
 
 <pre>
   !total_width=100%         
 </pre>
 
-Set label widths and hint/error left margins
+h3. Set label widths and hint/error left margins
 
 <pre>
   !label_width=24%
 </pre>
 
-Set width of inputs, textareas and selects
+h3. Set width of inputs, textareas and selects
 
 <pre>
   !input_width=70%          
 </pre> 
 
-Set horizontal padding for labels
+h3. Set horizontal padding for labels
 
 <pre>
   !label_pad=2%
 </pre> 
 
-Set alignment of labels
+h3. Set alignment of labels
 
 * "left" = labels floated left and text-align left
 * "right" = labels floated left and text-align right
@@ -75,7 +75,7 @@ Set alignment of labels
   !label_float="left"
 </pre> 
 
-Set alignment of commit buttons ("left" or "right")
+h3. Set alignment of commit buttons ("left" or "right")
 
 <pre>
   !button_float="left"
