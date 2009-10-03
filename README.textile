@@ -65,10 +65,19 @@ Set horizontal padding for labels
   !label_pad=2%
 </pre> 
 
-Set text alignment of labels (Must be either "left" or "right")
+Set alignment of labels
+
+* "left" = labels floated left and text-align left
+* "right" = labels floated left and text-align right
+* "clear" = labels above inputs
 
 <pre>
   !label_float="left"
+</pre> 
+
+Set alignment of commit buttons ("left" or "right")
+<pre>
+  !button_float="left"
 </pre>
 
 *Note:* Do not mix units (em px %) as it will break the calculations.
@@ -83,12 +92,12 @@ In order to set the basic layout, you don't need to even touch the defaults.
 
 <pre>
   form.formtastic
-    +formtastic(510px,100px,400px,8px,"right")
+    +formtastic(510px,100px,400px,8px,"right","left")
 </pre>
 
 Sweet!
 
-*Note:* It's good to give your form !total_width a little leeway (add 10px or 5% minimum) to keep those floats intact.
+*Note:* It's good to give your form !total_width a little leeway (add 10px or 5% minimum) to keep those floats intact. Still looking for a cleaner implementation and open to suggestions.
 
 h2. Alternative Inline Order
 
@@ -105,13 +114,15 @@ This is best used with right-aligned labels
     +formtastic(100%,20%,70%,4%,"right")
 </pre>
 
-You will need to provide a margin-top value to align labels with error messages, trial and error is your friend here:
+You will need to provide a margin-top value to align labels with error messages, there is a convenient mixin for that
 
 <pre>
   form.formtastic
     +formtastic(100%,20%,70%,4%,"right")
     +formtastic-errors-on-top(21px)
 </pre>
+
+The value must be adjusted until label and error message line up.
 
 h2. Hacks
 

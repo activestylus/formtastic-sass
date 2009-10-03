@@ -6,6 +6,11 @@
 // Using percentages will make the form fluid/elastic
 // Warning: Do not mix units (em, px, %) as calculations must be made
 //
+// Set the general layout of the form
+// "float" will use two column layout with labels on the left
+// "clear" will have labels above the inputs
+!form_layout="float"
+//
 // Set width of entire fieldset
 !total_width=100%         
 //
@@ -18,13 +23,18 @@
 // Set horizontal padding for labels
 !label_pad=2%
 //
-// Set text alignment of labels (Must be either "left" or "right")
+// Set alignment of labels
+// "clear" puts labels above inputs
+// "left" floats labels left and aligns text left
+// "right" floats labels left and aligns text right
 !label_float="left"       
 //
 // Set widths of all inputs, textareas and selects (all aligned)
 // False will preserve auto width
-!full_width_inputs=true   
+!full_width_inputs=true
 //
+// Set float direction of form buttons ("right" or "left")
+!button_float="left"
 // Installation ------------------------------------------
 //
 //$ sudo gem install haml
@@ -34,12 +44,18 @@
 // Set up master Sass file and include it in your html
 // Save this file as _base.sass and include it in master sass like so:
 //
-// @import formtastic_base.sass   
+// @import base.sass   
 //
 // Usage -------------------------------------------------
 //
 // form.formtastic
-//   +formtastic
+//   +formtastic-float
+//
+//  This will provide forms of columns with label floated left
+//  For label on top of inputs you can use
+//
+// form.formtastic
+//   +formtastic-block
 //
 // Customize ---------------------------------------------
 //
@@ -49,53 +65,84 @@
 // Note: When using pixel values be sure to pad total width by 10px
 // Still looking for a way to make this cleaner
 //--------------------------------------------------------
-=formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!full_width_inputs)
+=formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!button_float,!full_width_inputs)
   fieldset
     :width = !total_width
   ol li
     label
-      @if !label_float=="left"
-        :padding-left = !label_pad
-        :text-align left
-      @else
-        :padding-right = !label_pad
-        :text-align right
       :width = !label_width - !label_pad
-    li label
-      @if !label_float=="right"
-        :text-align left
-    fieldset
-      legend
-        :width = !label_width - !label_pad
+      @if !label_float=="clear"
+        :display block
+        :clear both
+        :float none
+      @else
         @if !label_float=="left"
           :padding-left = !label_pad
-        @else
+          :text-align left
+        @if !label_float=="left"
           :padding-right = !label_pad
-          :text-align right
-        span.label
+          :text-align right     
+    @if !label_float=="right"
+      li label
+        :text-align left 
+    fieldset
+      legend
+        @if !label_float=="clear"
+          :display block
+          :clear both
+          :float none
+          span.label
+            :display block
+            :clear both
+            :float none
+            
+        @else
           :width = !label_width - !label_pad
+          @if !label_float=="left"
+            :padding-left = !label_pad
+          @else
+            :padding-right = !label_pad
+            :text-align right
+          span.label
+            :position absolute
+            :width = !label_width - !label_pad 
       ol
-        :padding =  0 ( !total_width - (!input_width + !label_width)) 0 !label_width
-    p.inline-hints, p.inline-errors, ul.errors 
-      :margin = 0.5em 0 0 !label_width
-    @if !full_width_inputs
+        @if !label_float=="clear"
+          :padding 0
+        @else
+          :padding =  0 ( !total_width - (!input_width + !label_width)) 0 !label_width
+    @if !label_float != "clear"
       &.string input, &.password input, &.numeric input, &.text textarea, select
         :width = !input_width
-    &.boolean label
-      :padding-left = !label_width
+    @else
+      p.inline-hints, p.inline-errors, ul.errors 
+        :margin = 0.5em 0 0 !label_width        
+      @if !full_width_inputs
+        &.string input, &.password input, &.numeric input, &.text textarea, select
+          :width = !input_width  
+      &.boolean label
+        :padding-left = !label_width  
   fieldset
     &.buttons
       :width = !total_width
-      :padding-left = !label_width
-      &.right
+      @if !label_float != "clear"
+        :padding-left = !label_width
+      @if !button_float == "left"
         ol
-          :padding-left 0
-          :width = !input_width
           li
             :display inline
+            :width auto
+            :float left
+      @if !button_float == "right"
+        ol
+          :padding-left 0
+          @if !label_float == "clear"
+            :width = !input_width
+          li
             :float right
             :width auto
-            :padding-left = !label_pad
+            @if !label_float != "clear"
+              :padding-left = !label_pad
 
 //--------------------------------------------------------
 // Formtastic Base (modify at your own risk!)
