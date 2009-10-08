@@ -66,6 +66,7 @@
 // Still looking for a way to make this cleaner
 //--------------------------------------------------------
 =formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!button_float,!full_width_inputs)
+  :clear both
   fieldset
     :width = !total_width
   ol li
@@ -92,7 +93,8 @@
             :display block
             :clear both
             :float none
-            
+            :position static
+
         @else
           :width = !label_width - !label_pad
           @if !label_float=="left"
@@ -102,7 +104,7 @@
             :text-align right
           span.label
             :position absolute
-            :width = !label_width - !label_pad 
+            :width = !label_width - !label_pad
       ol
         @if !label_float=="clear"
           :padding 0
@@ -180,7 +182,7 @@ form.formtastic
       :float left
       :padding-left 0
       :width auto
-      
+
       label
         :line-height 100%      
         :padding-top 0
@@ -210,12 +212,13 @@ form.formtastic
           :border 0
           :display inline
     ul.errors
-      :color #cc0000
       :list-style square
+      :margin-left 14px
       li
         :padding 0
         :border none
         :display list-item
+        :clear both
     &.hidden
       :display none
     &.boolean label
@@ -260,29 +263,33 @@ form.formtastic
       :height 0
       :clear both
       :visibility hidden
-      
+
     //--------------------------------------------------------
-    // Formtastic basic Input Styles
+    // Formtastic Input/Label Styles
     //--------------------------------------------------------
     &.inputs
       // Styling for legends that act as labels on nested fieldset
       li legend span
         :font-size 1em
+        :padding-bottom 4px
       // Standard input styling
       textarea, input
         :border 1px solid #999
         :padding 3px
+      label
+        :padding-bottom 4px
       .check_boxes, .radio
         label
           :cursor pointer
-    
+          :padding-bottom 0px
+
   //--------------------------------------------------------
-  // Formtastic Colors
+  // Formtastic <li> and colors
   //--------------------------------------------------------
   ol li
     // Wrapper for labels and inputs
     // Adding horizontal margin/padding with care!
-    :padding 7px 0px
+    :padding 8px 0px
     &.required
       input,textarea,select
         :background-color #fff
@@ -293,6 +300,8 @@ form.formtastic
     &.optional
       input,textarea,select
         :background-color #fff
+  ul.errors
+    :color #a00
   p
     &.inline-errors
       :color #f00
