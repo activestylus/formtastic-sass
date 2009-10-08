@@ -66,7 +66,6 @@
 // Still looking for a way to make this cleaner
 //--------------------------------------------------------
 =formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!button_float,!full_width_inputs)
-  :clear both
   fieldset
     :width = !total_width
   ol li
@@ -93,8 +92,7 @@
             :display block
             :clear both
             :float none
-            :position static
-
+            
         @else
           :width = !label_width - !label_pad
           @if !label_float=="left"
@@ -104,7 +102,7 @@
             :text-align right
           span.label
             :position absolute
-            :width = !label_width - !label_pad
+            :width = !label_width - !label_pad 
       ol
         @if !label_float=="clear"
           :padding 0
@@ -115,7 +113,7 @@
         :width = !input_width
     @else
       p.inline-hints, p.inline-errors, ul.errors 
-        :margin = 0.5em 0 0 !label_width        
+        :margin = 0.7em 0 0 !label_width        
       @if !full_width_inputs
         &.string input, &.password input, &.numeric input, &.text textarea, select
           :width = !input_width  
@@ -182,7 +180,7 @@ form.formtastic
       :float left
       :padding-left 0
       :width auto
-
+      
       label
         :line-height 100%      
         :padding-top 0
@@ -212,13 +210,12 @@ form.formtastic
           :border 0
           :display inline
     ul.errors
+      :color #cc0000
       :list-style square
-      :margin-left 14px
       li
         :padding 0
         :border none
         :display list-item
-        :clear both
     &.hidden
       :display none
     &.boolean label
@@ -263,33 +260,29 @@ form.formtastic
       :height 0
       :clear both
       :visibility hidden
-
+      
     //--------------------------------------------------------
-    // Formtastic Input/Label Styles
+    // Formtastic basic Input Styles
     //--------------------------------------------------------
     &.inputs
       // Styling for legends that act as labels on nested fieldset
       li legend span
         :font-size 1em
-        :padding-bottom 4px
       // Standard input styling
       textarea, input
         :border 1px solid #999
         :padding 3px
-      label
-        :padding-bottom 4px
       .check_boxes, .radio
         label
           :cursor pointer
-          :padding-bottom 0px
-
+    
   //--------------------------------------------------------
-  // Formtastic <li> and colors
+  // Formtastic Colors
   //--------------------------------------------------------
   ol li
     // Wrapper for labels and inputs
     // Adding horizontal margin/padding with care!
-    :padding 8px 0px
+    :padding 7px 0px
     &.required
       input,textarea,select
         :background-color #fff
@@ -300,6 +293,8 @@ form.formtastic
     &.optional
       input,textarea,select
         :background-color #fff
+  p, ul.errors
+    :padding 6px 0px
   ul.errors
     :color #a00
   p
@@ -307,6 +302,7 @@ form.formtastic
       :color #f00
     &.inline-hints
       :color #777
+
   // The * after required labels
   span, label
     abbr
