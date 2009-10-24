@@ -137,6 +137,12 @@ Thanks to the misbehavior of legend tags, a tweak is needed for Safari when floa
 
 Internet Explorer is not yet supported. Patches are welcome.
 
+h2. Found a Bug?
+
+Please direct all queries to the issue tracker: 
+
+http://github.com/activestylus/formtastic-sass/issues
+
 h2. Caveat
 
 Overall this is still very alpha so please test across browsers before using in production.
