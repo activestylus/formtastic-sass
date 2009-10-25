@@ -150,6 +150,8 @@ form.formtastic
   ul, ol, li, fieldset, legend, input, textarea, select, p
     :margin 0
     :padding 0
+  p, ul.errors
+    :padding 6px 0px
   em
     :font-style normal
     :font-weight normal
@@ -212,12 +214,12 @@ form.formtastic
     ul.errors
       :color #cc0000
       :list-style square
-      :float none
-      :clear both
       li
         :padding 0
         :border none
         :display list-item
+        :float none
+        :clear both
     &.hidden
       :display none
     &.boolean label
@@ -295,8 +297,6 @@ form.formtastic
     &.optional
       input,textarea,select
         :background-color #fff
-  p, ul.errors
-    :padding 6px 0px
   ul.errors
     :color #a00
   p
