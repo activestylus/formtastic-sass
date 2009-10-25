@@ -141,7 +141,7 @@ h2. Found a Bug?
 
 Please direct all queries to the issue tracker: 
 
-http://github.com/activestylus/formtastic-sass/issues
+"http://github.com/activestylus/formtastic-sass/issues":http://github.com/activestylus/formtastic-sass/issues
 
 h2. Caveat
 
