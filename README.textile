@@ -2,7 +2,7 @@ h1. Formtastic Sass Mixins
 
 A few simple, yet powerful macros that add flexible styling to your "Formtastic":http://github.com/justinfrench/formtastic forms.
 
-*Version Bump!*: Some big changes are taking place here. As of this release (0.3.2) The +formtastic mixin will be deprecated in favor of tighter, more agile helpers (see Stacked & Floated Forms below)
+*Version Bump!*: Some big changes are taking place here. As of this release (0.3.2) The +formtastic mixin will be deprecated in favor of tighter, more agile helpers.
 
 Some improvements in this release:
 
@@ -39,7 +39,7 @@ Let's rock...
 
 h2. Stacked Forms
 
-You know the flavor, labels above the inputs, everything on new lines. Why muck around with line oafter line of css when you can simply do this?
+Gives you labels above the inputs, everything on new lines.
 
 <pre>
   +stack-form
