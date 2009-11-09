@@ -147,25 +147,31 @@
 // Formtastic Base (modify at your own risk!)
 //--------------------------------------------------------
 form.formtastic
+  // Reset form elements
   ul, ol, li, fieldset, legend, input, textarea, select, p
     :margin 0
     :padding 0
+  // Vertical padding on hints and error messages
   p, ul.errors
     :padding 6px 0px
   em
     :font-style normal
     :font-weight normal
+  // No bullet points on form lists
   ol, ul
     :list-style none
+  // Reset styling for * in required fields
   abbr, acronym
     :border 0
     :font-variant normal
+  // Fonts for inputs
   input, textarea, select
     :font-family inherit
     :font-size inherit
     :font-weight inherit
     :font-size 100%
   ol li
+    // Fixes for IE6
     :display inline-block
     :width 100%
     &:after
@@ -182,7 +188,6 @@ form.formtastic
       :float left
       :padding-left 0
       :width auto
-      
       label
         :line-height 100%      
         :padding-top 0
@@ -212,7 +217,6 @@ form.formtastic
           :border 0
           :display inline
     ul.errors
-      :color #cc0000
       :list-style square
       li
         :padding 0
