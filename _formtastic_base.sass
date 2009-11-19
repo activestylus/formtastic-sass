@@ -1,33 +1,490 @@
-//--------------------------------------------------------
-// Formtastic Sass Mixin
-//--------------------------------------------------------
-// A quick and flexible way to layout your forms
-// Assumes that you want to float/align your labels and inputs
-// Using percentages will make the form fluid/elastic
-// Warning: Do not mix units (em, px, %) as calculations must be made
 //
+// FORMTASTIC SASS
+// Flexible styling for formtastic forms
+// http://www.github.com/active-stylus/formtastic-sass
+//
+//--------------------------------------------------------
+// STACKED FORMS
+// Labels fill up the full width of the form
+// Inputs are on new lines
+//--------------------------------------------------------
+//
+// Arguments:
+//
+// +form-stack(full-width, input-width, submit-button-align)
+//
+// Example:
+//
+// form.formtastic
+//   +form-stack(300px,"full","right")
+//
+// Default Settings:
+//
+!stacked_fieldset=100%
+// Full width of the fieldset
+//
+!stacked_input="auto"
+// "auto"   = automatic widths
+// "full"   = same width as form
+// "960px"  = custom width
+//
+!stacked_padding=0
+// Left padding on all labels and inputs
+//  
+!stacked_button_align="buttons-left"
+// "buttons-left"   = float submit button left
+// "buttons-right"  = float submit button right
+// "buttons-full"   = submit button matches input width
+//
+!stacked_select_width = "select-auto"
+// "select-auto"   = default width
+// "select-full"  = same as specified input width
+//
+//--------------------------------------------------------
+// FLOATED FORMS
+// Column layout with labels left of the inputs
+// Comes in 2 flavors for text alignment of the labels
+//--------------------------------------------------------
+//
+// Arguments:
+//
+// +form-labels-left(total-width, label-width, input-width, label-padding-x, submit-align)
+//
+// Examples:
+//
+// form.lefty
+//   +form-float-left(800px,500px,200px,6px,"buttons-left")
+//
+// form.righty
+//   +form-float-right(800px,500px,200px,6px,"buttons-left")
+//
+//--------------------------------------------------------
+// Default Settings:
+// (do not mix units because calculations are made)
+//
+!floated_total_width = 100%
+// Total Width of form
+//
+!floated_input_width = 70%
+// Width of inputs
+//
+!floated_label_width = 20%
+// Width of Label
+// 
+!floated_label_padding_x = 0
+// How far labels are spaced from inputs
+//
+!floated_button_align = "buttons-left"
+// "buttons-left"   = float submit button left
+// "buttons-right"  = float submit button right
+// "buttons-full"   = submit button matches input width
+//
+!floated_select_width = "select-auto"
+// "select-auto"   = default width
+// "select-full"  = same as specified input width
+//
+//========================================================
+// FORMTASTIC STYLING
+// Note: Be careful when modifying widths and
+// horizontal padding/margins as you can break layouts
+//========================================================
+=clearfix
+  *display: inline-block
+  &:after      
+    content: " "
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+//
+//
+//
+//--------------------------------------------------------
+//========================================================
+// Base stuff (do not edit unless you are smarter than me :p)
+//========================================================
+//--------------------------------------------------------
+//
+//
+//
+//--------------------------------------------------------
+// Generic Mixins
+//--------------------------------------------------------
+=float-labels(!width,!padding=0,!direction="left")
+  :width = !width - !padding
+  :text-align = !direction
+  :display inline
+  :float left
+  :clear none
+  @if !padding == 0
+    :padding 0
+  @else
+    :padding-#{!direction} = !padding
+=block(!block_float="clear")
+  :display block
+  @if !block_float=="clear" 
+    :clear both
+    :float none
+  @else
+    :float = !block_float
+=inline(!float="none",!clear="none")
+  :display inline
+  :float = !float
+  :clear = !clear
+=reset-form
+  // Reset elements
+  ul, ol, legend, p
+    :margin 0
+    :padding 0
+  li
+    :margin-left 0px
+    :margin-right 0px
+    :padding-left 0px
+    :padding-right 0px
+  // Clearfix fieldsets
+  fieldset
+    :display block
+    +clearfix
+  // * fields
+  abbr, acronym
+    :border 0
+    :font-variant normal
+    :font-weight normal
+  // Reset list styles
+  ol, ul
+    :list-style none
+  // Clearfix label
+  label
+    :display block
+    +clearfix
+  // Align Inputs
+  input, textarea
+    :vertical-align middle
+  // Make Labels Clickable
+  .check_boxes, .radio
+    input
+      :margin 0
+    label
+      :cursor pointer
+  // Hide hidden fields
+  .hidden
+    :display none
+  // Date Time Selects shown inline
+  .date, .time, .datetime
+    li
+      :float left
+      :width auto
+      :clear none
+    label
+      :display none 
+      :width auto
+    input
+      :display inline
+      :margin 0
+      :padding 0
+  // Error lists for each input
+  .errors
+    :list-style square
+    li
+      :padding 0
+      :border none
+      :display list-item
+      :float none
+      :clear both
+  .inputs
+    :z-index 99
+  // Float Submit Buttons
+  .buttons li
+    :float left
+  // Reset Nested Fieldset & Legends
+  li
+    +clearfix
+    :display block
+    fieldset
+      :border none
+      :position relative
+      :margin-top 0px
+    legend
+      :display block
+      :margin-bottom 0
+    .label
+      :display block
+      :clear both
+      :background transparent
+    // Reset lists for checkboxes and radio buttons
+    ol
+      :float left
+      :margin 0
+      li
+        :padding 0
+        :border 0
+        :display inline
+//
+//--------------------------------------------------------
+// Form Stack
+//--------------------------------------------------------
+//
+=stack-form(!stacked_fieldset, !stacked_input, !stacked_padding, !stacked_button_align, !stacked_select_width)
+  +reset-form
+  fieldset
+    :width = !stacked_fieldset
+  ol
+    :padding-left = !stacked_padding
+  input
+    :clear both
+    :float none
+  li
+    +block
+    :width = !stacked_fieldset
+    ol
+      :padding 0
+    li
+      :clear none
+      :width auto
+    fieldset
+      legend, legend .label
+        :display block
+        :clear both
+      .label
+        :position relative
+      label, input
+        :width auto
+  .date, .time, .datetime
+    ol
+      :width = !stacked_fieldset
+    li
+      :display inline
+      :clear none
+      :float left
+      :padding-right = !stacked_padding / 2
+  .checkbox, .radio
+    li
+      :display block
+    input
+      :border none
+  label
+    +block
+    :width = !stacked_input
+  input, textarea
+    @if !stacked_input=="full"
+      :width = !stacked_fieldset - !stacked_padding
+    @else
+      :width = !stacked_input
+  select
+    @if !stacked_select_width == "select-auto"
+      :width auto
+    @else
+      :width = !stacked_input    
+  .errors li
+    :display list-item
+  .buttons
+    ol
+      :padding-left = !stacked_padding
+      :padding-right = !stacked_padding
+    li      
+      @if !stacked_button_align == "buttons-left"
+        :float left
+      @if !stacked_button_align == "buttons-right"
+        :float right
+      :width auto
+      :clear none
+      :display inline
+    input
+      @if !stacked_button_align == "buttons-full"
+        :width = !stacked_fieldset
+      @else
+        :width auto  
+  #errorExplanation
+    :width = !stacked_fieldset - !stacked_padding
+  .label
+    // Legend Left Margin Hack for IE
+    :#left -0.5em
+    :#position relative
+//
+//--------------------------------------------------------
+// Float Form Core
+//--------------------------------------------------------
+//
+=float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align, !floated_label_text_align, !floated_select_width )
+  +reset-form
+  fieldset
+    :width = !floated_total_width
+  label
+    :float left
+    :width = !floated_label_width - !floated_label_padding_x
+    :text-align = !floated_label_text_align
+    :padding-#{!floated_label_text_align} = !floated_label_padding_x
+  li
+    ol
+      :padding =  0 ( !floated_total_width - (!floated_input_width + !floated_label_width)) 0 !floated_label_width
+    fieldset
+      legend, legend .label
+        :display block
+      legend
+        +float-labels(!floated_label_width,!floated_label_padding_x,!floated_label_text_align)
+        :width = !floated_total_width - !floated_label_padding_x
+      .label
+        :position absolute
+        :width = !floated_label_width - !floated_label_padding_x
+        :top 0px
+        @if !floated_label_text_align=="right"
+          :left 0
+        @else
+          :left = !floated_label_padding_x
+      label
+        :padding-left 0
+      label, input
+        :width auto
+        :display inline
+        :clear none
+        :text-align left
+      select
+        :padding 0
+        :clear both
+        :display block
+  .inline-hints, .inline-errors, .errors 
+    :margin = 0 0 0 !floated_label_width        
+  input, textarea
+    :width = !floated_input_width
+  select
+    @if !floated_select_width=="select-auto"
+      :width auto
+    @else
+      :width = !floated_input_width
+  .checkbox, .radio
+    li
+      :display block
+      :clear both
+    input
+      :border none
+  .buttons
+    :padding-left = !floated_label_width
+    :width = !floated_total_width - !floated_label_width
+    input
+      :width auto
+    ol
+      @if !floated_button_align == "buttons-right"
+        :padding-right = !floated_label_padding_x
+    li
+      :width auto
+      @if !floated_button_align == "buttons-right"
+        :float right
+      @else
+        :float left
+      @if !floated_button_align == "full-buttons"
+        input
+          :width = !floated_input_width
+      @else
+        :display inline
+  #errorExplanation
+    :margin-left = !floated_label_width
+    :width = !floated_input_width 
+//
+//--------------------------------------------------------
+// Float Form Left/Right
+//--------------------------------------------------------
+//
+=float-form-left(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align)
+  +float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align,"left")
+
+=float-form-right(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align)
+  +float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align,"right")
+
+//
+//--------------------------------------------------------
+// Float Inputs
+//--------------------------------------------------------
+//    
+=float-inputs(!margin_right=10px,!line_height=150%)
+  .radio, .check_boxes
+    ol
+      +inline("left")
+    li
+      :width auto
+      +inline("left","none")
+    input
+      :float none
+      :display inline
+    label
+      :display block
+      :clear none
+      :width auto
+      :padding-left 0
+      :line-height = !line_height
+      :margin-right = !margin_right
+//
+=float-inputs-for(!dom_target,!margin_right=10px,!line_height=150%)
+  #{!dom_target}
+    +float-inputs-core(!margin_right,!line_height)
+//
+//--------------------------------------------------------
+// Grid Inputs
+//--------------------------------------------------------
+//
+=grid-inputs(!width=100px,!line_height=150%)
+  .radio, .check_boxes
+    ol
+      +inline("left")
+    li
+      +inline("left","none")
+      :width = !width
+    label
+      +inline("left","none")
+      :width auto
+      :line-height = !line_height
+
+=grid-inputs-for(!dom_target,!width=100px,!line_height=150%)
+  #{!dom_target}
+    +grid-inputs-core(!width,!line_height)
+
+//--------------------------------------------------------
+// Labels
+//--------------------------------------------------------
+=bold-labels(!select="all")
+  li
+    @if !select == "all"
+      label, legend span.label
+        :font-weight bold
+      li
+        label
+          :font-weight normal
+    @if !select == "required"
+      &.required
+        label, .label
+          :font-weight bold
+        li
+          label
+            :font-weight normal    
+ 
+
+//---------------------------------------------------
+// Original Mixin (deprecated!)
+//
+!form_layout="float"
 // Set the general layout of the form
 // "float" will use two column layout with labels on the left
 // "clear" will have labels above the inputs
-!form_layout="float"
+
 //
-// Set width of entire fieldset
 !total_width=100%         
+// Set width of entire fieldset
 //
 // Set label widths and hint/error left margins
 !label_width=24%          
 //
-// Set width of inputs, textareas and selects
 !input_width=70%          
+// Set width of inputs, textareas and selects
 //
-// Set horizontal padding for labels
 !label_pad=2%
+// Set horizontal padding for labels
+
 //
+!label_float="left"
 // Set alignment of labels
 // "clear" puts labels above inputs
 // "left" floats labels left and aligns text left
 // "right" floats labels left and aligns text right
-!label_float="left"       
+       
 //
 // Set widths of all inputs, textareas and selects (all aligned)
 // False will preserve auto width
@@ -142,178 +599,6 @@
             :width auto
             @if !label_float != "clear"
               :padding-left = !label_pad
-
-//--------------------------------------------------------
-// Formtastic Base (modify at your own risk!)
-//--------------------------------------------------------
-form.formtastic
-  // Reset form elements
-  ul, ol, li, fieldset, legend, input, textarea, select, p
-    :margin 0
-    :padding 0
-  // Vertical padding on hints and error messages
-  p, ul.errors
-    :padding 6px 0px
-  em
-    :font-style normal
-    :font-weight normal
-  // No bullet points on form lists
-  ol, ul
-    :list-style none
-  // Reset styling for * in required fields
-  abbr, acronym
-    :border 0
-    :font-variant normal
-  // Fonts for inputs
-  input, textarea, select
-    :font-family inherit
-    :font-size inherit
-    :font-weight inherit
-    :font-size 100%
-  ol li
-    // Fixes for IE6
-    :display inline-block
-    :width 100%
-    &:after
-      :content "."
-      :display block
-      :height 0
-      :clear both
-      :visibility hidden
-    label
-      :display block
-      :float left
-    li 
-      :margin-right 8px
-      :float left
-      :padding-left 0
-      :width auto
-      label
-        :line-height 100%      
-        :padding-top 0
-        :margin-right 8px
-      input
-        :line-height 100%
-        :vertical-align middle
-        :margin-top -0.1em
-    fieldset
-      :position relative
-      legend
-        :position absolute
-        :padding-top 0.1em
-        :display block
-        span.label
-          :display block
-          :position absolute
-          :clear both
-          :background transparent
-          abbr
-            :display inline
-      ol
-        :float left
-        :margin 0
-        li
-          :padding 0
-          :border 0
-          :display inline
-    ul.errors
-      :list-style square
-      li
-        :padding 0
-        :border none
-        :display list-item
-        :float none
-        :clear both
-    &.hidden
-      :display none
-    &.boolean label
-      :width auto
-      input
-        :margin 0 0.5em 0 0.2em
-    &.radio, &.check_boxes
-      fieldset ol
-        :margin-bottom -0.6em
-        li
-          :float left
-          :display inline
-          :margin 0.1em 0 0.5em 0
-          label
-            :float none
-            :width auto
-            :padding-left 0px
-            input
-              :margin-right 0.1em
-    &.date, &.time, &.datetime
-      fieldset ol
-        li
-          :float left
-          :margin 0 .3em 0 0
-          label
-            :display none 
-            input
-              :display inline
-              :margin 0
-              :padding 0  
-  fieldset
-    :border 0
-    :display inline-block
-    &.inputs
-      :z-index 99
-    &.buttons li
-      :float left
-      :padding-right 0.5em
-    &:after
-      :content "."
-      :display block
-      :height 0
-      :clear both
-      :visibility hidden
-      
-    //--------------------------------------------------------
-    // Formtastic basic Input Styles
-    //--------------------------------------------------------
-    &.inputs
-      // Styling for legends that act as labels on nested fieldset
-      li legend span
-        :font-size 1em
-      // Standard input styling
-      textarea, input
-        :border 1px solid #999
-        :padding 3px
-      .check_boxes, .radio
-        label
-          :cursor pointer
-    
-  //--------------------------------------------------------
-  // Formtastic Colors
-  //--------------------------------------------------------
-  ol li
-    // Wrapper for labels and inputs
-    // Adding horizontal margin/padding with care!
-    :padding 7px 0px
-    &.required
-      input,textarea,select
-        :background-color #fff
-    &.error
-      input,textarea,select
-        :background-color #fcc
-        :border 1px solid #f66
-    &.optional
-      input,textarea,select
-        :background-color #fff
-  ul.errors
-    :color #a00
-  p
-    &.inline-errors
-      :color #f00
-    &.inline-hints
-      :color #777
-
-  // The * after required labels
-  span, label
-    abbr
-      :color #f00
-
 //--------------------------------------------------------
 // Formtastic Errors on top (aligned with label)
 //
@@ -331,19 +616,4 @@ form.formtastic
       :padding-bottom 18px
     fieldset label
       :margin-top 0
-      :padding-bottom 0  
-
-//--------------------------------------------------------
-// Hacks
-//--------------------------------------------------------
-// Safari
-// Legend in nested fieldsets tends to misbehave with percentages
-// Set a pixel or em width
-=formtastic-safari-hack(!width=200px)
-  fieldset ol li fieldset
-    legend, legend span
-      :display block
-      :width = !width
-
-// IE6 HACK
-// TODO: Basic fixes to include in separate ie.sass file
+      :padding-bottom 0
