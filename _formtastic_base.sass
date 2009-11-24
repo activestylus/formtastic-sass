@@ -30,7 +30,7 @@
 //
 !stacked_padding=0
 // Left padding on all labels and inputs
-//  
+//
 !stacked_button_align="buttons-left"
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
@@ -70,7 +70,7 @@
 //
 !floated_label_width = 20%
 // Width of Label
-// 
+//
 !floated_label_padding_x = 0
 // How far labels are spaced from inputs
 //
@@ -78,6 +78,11 @@
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
 // "buttons-full"   = submit button matches input width
+//
+!floated_label_text_align = "left"
+// "left"
+// "right"
+// "center"
 //
 !floated_select_width = "select-auto"
 // "select-auto"   = default width
@@ -90,7 +95,7 @@
 //========================================================
 =clearfix
   *display: inline-block
-  &:after      
+  &:after
     content: " "
     display: block
     height: 0
@@ -122,7 +127,7 @@
     :padding-#{!direction} = !padding
 =block(!block_float="clear")
   :display block
-  @if !block_float=="clear" 
+  @if !block_float=="clear"
     :clear both
     :float none
   @else
@@ -176,7 +181,7 @@
       :width auto
       :clear none
     label
-      :display none 
+      :display none
       :width auto
     input
       :display inline
@@ -274,14 +279,14 @@
     @if !stacked_select_width == "select-auto"
       :width auto
     @else
-      :width = !stacked_input    
+      :width = !stacked_input
   .errors li
     :display list-item
   .buttons
     ol
       :padding-left = !stacked_padding
       :padding-right = !stacked_padding
-    li      
+    li
       @if !stacked_button_align == "buttons-left"
         :float left
       @if !stacked_button_align == "buttons-right"
@@ -293,7 +298,7 @@
       @if !stacked_button_align == "buttons-full"
         :width = !stacked_fieldset
       @else
-        :width auto  
+        :width auto
   #errorExplanation
     :width = !stacked_fieldset - !stacked_padding
   .label
@@ -342,8 +347,8 @@
         :padding 0
         :clear both
         :display block
-  .inline-hints, .inline-errors, .errors 
-    :margin = 0 0 0 !floated_label_width        
+  .inline-hints, .inline-errors, .errors
+    :margin = 0 0 0 !floated_label_width
   input, textarea
     :width = !floated_input_width
   select
@@ -378,7 +383,7 @@
         :display inline
   #errorExplanation
     :margin-left = !floated_label_width
-    :width = !floated_input_width 
+    :width = !floated_input_width
 //
 //--------------------------------------------------------
 // Float Form Left/Right
@@ -394,7 +399,7 @@
 //--------------------------------------------------------
 // Float Inputs
 //--------------------------------------------------------
-//    
+//
 =float-inputs(!margin_right=10px,!line_height=150%)
   .radio, .check_boxes
     ol
@@ -454,8 +459,8 @@
           :font-weight bold
         li
           label
-            :font-weight normal    
- 
+            :font-weight normal
+
 
 //---------------------------------------------------
 // Original Mixin (deprecated!)
@@ -466,13 +471,13 @@
 // "clear" will have labels above the inputs
 
 //
-!total_width=100%         
+!total_width=100%
 // Set width of entire fieldset
 //
 // Set label widths and hint/error left margins
-!label_width=24%          
+!label_width=24%
 //
-!input_width=70%          
+!input_width=70%
 // Set width of inputs, textareas and selects
 //
 !label_pad=2%
@@ -484,7 +489,7 @@
 // "clear" puts labels above inputs
 // "left" floats labels left and aligns text left
 // "right" floats labels left and aligns text right
-       
+
 //
 // Set widths of all inputs, textareas and selects (all aligned)
 // False will preserve auto width
@@ -501,7 +506,7 @@
 // Set up master Sass file and include it in your html
 // Save this file as _base.sass and include it in master sass like so:
 //
-// @import base.sass   
+// @import base.sass
 //
 // Usage -------------------------------------------------
 //
@@ -518,7 +523,7 @@
 //
 // form.formtastic
 //   +formtastic(410px,100px,300px,12px,"right",true)
-//                               
+//
 // Note: When using pixel values be sure to pad total width by 10px
 // Still looking for a way to make this cleaner
 //--------------------------------------------------------
@@ -538,7 +543,7 @@
           :padding-left = !label_pad
           :text-align left
         @else
-          :text-align right 
+          :text-align right
     fieldset
       legend
         @if !label_float=="clear"
@@ -549,7 +554,7 @@
             :display block
             :clear both
             :float none
-            
+
         @else
           :width = !label_width - !label_pad
           @if !label_float=="left"
@@ -559,7 +564,7 @@
             :text-align right
           span.label
             :position absolute
-            :width = !label_width - !label_pad 
+            :width = !label_width - !label_pad
       ol
         @if !label_float=="clear"
           :padding 0
@@ -569,13 +574,13 @@
       &.string input, &.password input, &.numeric input, &.text textarea, select
         :width = !input_width
     @else
-      p.inline-hints, p.inline-errors, ul.errors 
-        :margin = 0 0 0 !label_width        
+      p.inline-hints, p.inline-errors, ul.errors
+        :margin = 0 0 0 !label_width
       @if !full_width_inputs
         &.string input, &.password input, &.numeric input, &.text textarea, select
-          :width = !input_width  
+          :width = !input_width
       &.boolean label
-        :padding-left = !label_width  
+        :padding-left = !label_width
   fieldset
     &.buttons
       @if !label_float == "clear"
