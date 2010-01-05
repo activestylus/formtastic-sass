@@ -9,7 +9,7 @@ Some improvements in this release:
 * All custom styling removed from core
 * Skinnable forms (example provided in _skintastic.sass)
 * New mixins for checkboxes and radio buttons (float and grid styling)
-* "Demo Rails app":http://www.github.com/active-stylus/test_formtastic_sass is available, with a jQuery-powered debugging interface
+* "Demo Rails app":http://www.github.com/activestylus/test_formtastic_sass is available, with a jQuery-powered debugging interface
 * Much less CSS selectors = smaller footprint
 * No more Safari Hacks :)
 
@@ -173,7 +173,7 @@ This helper will be deprecated in future versions. Please use the mixins specifi
 h3. Set width of entire fieldset
 
 <pre>
-  !total_width=100%         
+  !total_width=100%
 </pre>
 
 h3. Set label widths and hint/error left margins
@@ -185,14 +185,14 @@ h3. Set label widths and hint/error left margins
 h3. Set width of inputs, textareas and selects
 
 <pre>
-  !input_width=70%          
-</pre> 
+  !input_width=70%
+</pre>
 
 h3. Set horizontal padding for labels
 
 <pre>
   !label_pad=2%
-</pre> 
+</pre>
 
 h3. Set alignment of labels
 
@@ -202,7 +202,7 @@ h3. Set alignment of labels
 
 <pre>
   !label_float="left"
-</pre> 
+</pre>
 
 h3. Set alignment of commit buttons ("left" or "right")
 
@@ -256,7 +256,7 @@ The value must be adjusted until label and error message line up.
 
 h2. Found a Bug?
 
-Please direct all queries to the issue tracker: 
+Please direct all queries to the issue tracker:
 
 "http://github.com/activestylus/formtastic-sass/issues":http://github.com/activestylus/formtastic-sass/issues
 
