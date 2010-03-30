@@ -95,7 +95,7 @@
 // Note: Be careful when modifying widths and
 // horizontal padding/margins as you can break layouts
 //========================================================
-=clearfix
+=formtastic_clearfix
   *display: inline-block
   &:after
     content: " "
@@ -151,7 +151,7 @@
   // Clearfix fieldsets
   fieldset
     :display block
-    +clearfix
+    +formtastic_clearfix
   // * fields
   abbr, acronym
     :border 0
@@ -163,7 +163,7 @@
   // Clearfix label
   label
     :display block
-    +clearfix
+    +formtastic_clearfix
   // Align Inputs
   input, textarea
     :vertical-align middle
@@ -205,7 +205,7 @@
     :float left
   // Reset Nested Fieldset & Legends
   li
-    +clearfix
+    +formtastic_clearfix
     :display block
     fieldset
       :border none
