@@ -34,6 +34,7 @@
 !stacked_button_align="buttons-left"
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
+// "buttons-center" = no float, auto width
 // "buttons-full"   = submit button matches input width
 //
 !stacked_select_width = "select-auto"
@@ -77,6 +78,7 @@
 !floated_button_align = "buttons-left"
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
+// "buttons-center" = no float, auto width
 // "buttons-full"   = submit button matches input width
 //
 !floated_label_text_align = "left"
@@ -291,6 +293,8 @@
         :float left
       @if !stacked_button_align == "buttons-right"
         :float right
+      @if !stacked_button_align == "buttons-center"
+        :float none
       :width auto
       :clear none
       :display inline
