@@ -20,24 +20,29 @@
 //
 // Default Settings:
 //
-!stacked_fieldset=100%
+$stacked_fieldset: 100%
+
 // Full width of the fieldset
 //
-!stacked_input="auto"
+$stacked_input: auto
+
 // "auto"   = automatic widths
 // "full"   = same width as form
 // "960px"  = custom width
 //
-!stacked_padding=0
+$stacked_padding: 0
+
 // Left padding on all labels and inputs
 //
-!stacked_button_align="buttons-left"
+$stacked_button_align: buttons-left
+
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
 // "buttons-center" = no float, auto width
 // "buttons-full"   = submit button matches input width
 //
-!stacked_select_width = "select-auto"
+$stacked_select_width: select-auto
+
 // "select-auto"   = default width
 // "select-full"  = same as specified input width
 //
@@ -63,30 +68,37 @@
 // Default Settings:
 // (do not mix units because calculations are made)
 //
-!floated_total_width = 100%
+$floated_total_width: 100%
+
 // Total Width of form
 //
-!floated_input_width = 70%
+$floated_input_width: 70%
+
 // Width of inputs
 //
-!floated_label_width = 20%
+$floated_label_width: 20%
+
 // Width of Label
 //
-!floated_label_padding_x = 0
+$floated_label_padding_x: 0
+
 // How far labels are spaced from inputs
 //
-!floated_button_align = "buttons-left"
+$floated_button_align: buttons-left
+
 // "buttons-left"   = float submit button left
 // "buttons-right"  = float submit button right
 // "buttons-center" = no float, auto width
 // "buttons-full"   = submit button matches input width
 //
-!floated_label_text_align = "left"
+$floated_label_text_align: left
+
 // "left"
 // "right"
 // "center"
 //
-!floated_select_width = "select-auto"
+$floated_select_width: select-auto
+
 // "select-auto"   = default width
 // "select-full"  = same as specified input width
 //
@@ -103,6 +115,7 @@
     height: 0
     clear: both
     visibility: hidden
+
 //
 //
 //
@@ -117,378 +130,391 @@
 //--------------------------------------------------------
 // Generic Mixins
 //--------------------------------------------------------
-=float-labels(!width,!padding=0,!direction="left")
-  :width = !width - !padding
-  :text-align = !direction
-  :display inline
-  :float left
-  :clear none
-  @if !padding == 0
-    :padding 0
+=float-labels($width, $padding: 0, $direction: left)
+  width: $width - $padding
+  text-align: $direction
+  display: inline
+  float: left
+  clear: none
+  @if $padding == 0
+    padding: 0
   @else
-    :padding-#{!direction} = !padding
-=block(!block_float="clear")
-  :display block
-  @if !block_float=="clear"
-    :clear both
-    :float none
+    padding-#{$direction}: $padding
+
+=block($block_float: clear)
+  display: block
+  @if $block_float == "clear"
+    clear: both
+    float: none
   @else
-    :float = !block_float
-=inline(!float="none",!clear="none")
-  :display inline
-  :float = !float
-  :clear = !clear
+    float: $block_float
+
+=inline($float: none, $clear: none)
+  display: inline
+  float: $float
+  clear: $clear
+
 =reset-form
   // Reset elements
   ul, ol, legend, p
-    :margin 0
-    :padding 0
+    margin: 0
+    padding: 0
   li
-    :margin-left 0px
-    :margin-right 0px
-    :padding-left 0px
-    :padding-right 0px
+    margin-left: 0px
+    margin-right: 0px
+    padding-left: 0px
+    padding-right: 0px
   // Clearfix fieldsets
   fieldset
-    :display block
+    display: block
     +formtastic_clearfix
   // * fields
   abbr, acronym
-    :border 0
-    :font-variant normal
-    :font-weight normal
+    border: 0
+    font-variant: normal
+    font-weight: normal
   // Reset list styles
   ol, ul
-    :list-style none
+    list-style: none
   // Clearfix label
   label
-    :display block
+    display: block
     +formtastic_clearfix
   // Align Inputs
   input, textarea
-    :vertical-align middle
+    vertical-align: middle
   // Make Labels Clickable
   .check_boxes, .radio
     input
-      :margin 0
+      margin: 0
     label
-      :cursor pointer
+      cursor: pointer
   // Hide hidden fields
   .hidden
-    :display none
+    display: none
   // Date Time Selects shown inline
   .date, .time, .datetime
     li
-      :float left
-      :width auto
-      :clear none
+      float: left
+      width: auto
+      clear: none
     label
-      :display none
-      :width auto
+      display: none
+      width: auto
     input
-      :display inline
-      :margin 0
-      :padding 0
+      display: inline
+      margin: 0
+      padding: 0
   // Error lists for each input
   .errors
-    :list-style square
+    list-style: square
     li
-      :padding 0
-      :border none
-      :display list-item
-      :float none
-      :clear both
+      padding: 0
+      border: none
+      display: list-item
+      float: none
+      clear: both
   .inputs
-    :z-index 99
+    z-index: 99
   // Float Submit Buttons
   .buttons li
-    :float left
+    float: left
   // Reset Nested Fieldset & Legends
   li
     +formtastic_clearfix
-    :display block
+    display: block
     fieldset
-      :border none
-      :position relative
-      :margin-top 0px
+      border: none
+      position: relative
+      margin-top: 0px
     legend
-      :display block
-      :margin-bottom 0
+      display: block
+      margin-bottom: 0
     .label
-      :display block
-      :clear both
-      :background transparent
+      display: block
+      clear: both
+      background: transparent
     // Reset lists for checkboxes and radio buttons
     ol
-      :float left
-      :margin 0
+      float: left
+      margin: 0
       li
-        :padding 0
-        :border 0
-        :display inline
+        padding: 0
+        border: 0
+        display: inline
+
 //
 //--------------------------------------------------------
 // Form Stack
 //--------------------------------------------------------
 //
-=stack-form(!stacked_fieldset, !stacked_input, !stacked_padding, !stacked_button_align, !stacked_select_width)
+=stack-form($stacked_fieldset, $stacked_input, $stacked_padding, $stacked_button_align, $stacked_select_width)
   +reset-form
   fieldset
-    :width = !stacked_fieldset
+    width: $stacked_fieldset
   ol
-    :padding-left = !stacked_padding
+    padding-left: $stacked_padding
   input
-    :clear both
-    :float none
+    clear: both
+    float: none
   li
     +block
-    :width = !stacked_fieldset
+    width: $stacked_fieldset
     ol
-      :padding 0
+      padding: 0
     li
-      :clear none
-      :width auto
+      clear: none
+      width: auto
     fieldset
       legend, legend .label
-        :display block
-        :clear both
+        display: block
+        clear: both
       .label
-        :position relative
+        position: relative
       label, input
-        :width auto
+        width: auto
   .date, .time, .datetime
     ol
-      :width = !stacked_fieldset
+      width: $stacked_fieldset
     li
-      :display inline
-      :clear none
-      :float left
-      :padding-right = !stacked_padding / 2
+      display: inline
+      clear: none
+      float: left
+      padding-right: $stacked_padding / 2
   .checkbox, .radio
     li
-      :display block
+      display: block
     input
-      :border none
+      border: none
   label
     +block
-    :width = !stacked_input
+    width: $stacked_input
   input, textarea
-    @if !stacked_input=="full"
-      :width = !stacked_fieldset - !stacked_padding
+    @if $stacked_input == "full"
+      width: $stacked_fieldset - $stacked_padding
     @else
-      :width = !stacked_input
+      width: $stacked_input
   select
-    @if !stacked_select_width == "select-auto"
-      :width auto
+    @if $stacked_select_width == "select-auto"
+      width: auto
     @else
-      :width = !stacked_input
+      width: $stacked_input
   .errors li
-    :display list-item
+    display: list-item
   .buttons
     ol
-      :padding-left = !stacked_padding
-      :padding-right = !stacked_padding
+      padding-left: $stacked_padding
+      padding-right: $stacked_padding
     li
-      @if !stacked_button_align == "buttons-left"
-        :float left
-      @if !stacked_button_align == "buttons-right"
-        :float right
-      @if !stacked_button_align == "buttons-center"
-        :float none
-      :width auto
-      :clear none
-      :display inline
+      @if $stacked_button_align == "buttons-left"
+        float: left
+      @if $stacked_button_align == "buttons-right"
+        float: right
+      @if $stacked_button_align == "buttons-center"
+        float: none
+      width: auto
+      clear: none
+      display: inline
     input
-      @if !stacked_button_align == "buttons-full"
-        :width = !stacked_fieldset
+      @if $stacked_button_align == "buttons-full"
+        width: $stacked_fieldset
       @else
-        :width auto
+        width: auto
   #errorExplanation
-    :width = !stacked_fieldset - !stacked_padding
+    width: $stacked_fieldset - $stacked_padding
   .label
     // Legend Left Margin Hack for IE
-    :#left -0.5em
-    :#position relative
+    #left: -0.5em
+    #position: relative
+
 //
 //--------------------------------------------------------
 // Float Form Core
 //--------------------------------------------------------
 //
-=float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align, !floated_label_text_align, !floated_select_width )
+=float-form($floated_total_width, $floated_label_width, $floated_input_width, $floated_label_padding_x, $floated_button_align, $floated_label_text_align, $floated_select_width)
   +reset-form
   fieldset
-    :width = !floated_total_width
+    width: $floated_total_width
   label
-    :float left
-    :width = !floated_label_width - !floated_label_padding_x
-    :text-align = !floated_label_text_align
-    :padding-#{!floated_label_text_align} = !floated_label_padding_x
+    float: left
+    width: $floated_label_width - $floated_label_padding_x
+    text-align: $floated_label_text_align
+    padding-#{$floated_label_text_align}: $floated_label_padding_x
   li
     ol
-      :padding =  0 ( !floated_total_width - (!floated_input_width + !floated_label_width)) 0 !floated_label_width
+      padding: 0 $floated_total_width - $floated_input_width + $floated_label_width 0 $floated_label_width
     fieldset
       legend, legend .label
-        :display block
+        display: block
       legend
-        +float-labels(!floated_label_width,!floated_label_padding_x,!floated_label_text_align)
-        :width = !floated_total_width - !floated_label_padding_x
+        +float-labels($floated_label_width, $floated_label_padding_x, $floated_label_text_align)
+        width: $floated_total_width - $floated_label_padding_x
       .label
-        :position absolute
-        :width = !floated_label_width - !floated_label_padding_x
-        :top 0px
-        @if !floated_label_text_align=="right"
-          :left 0
+        position: absolute
+        width: $floated_label_width - $floated_label_padding_x
+        top: 0px
+        @if $floated_label_text_align == "right"
+          left: 0
         @else
-          :left = !floated_label_padding_x
+          left: $floated_label_padding_x
       label
-        :padding-left 0
+        padding-left: 0
       label, input
-        :width auto
-        :display inline
-        :clear none
-        :text-align left
+        width: auto
+        display: inline
+        clear: none
+        text-align: left
       select
-        :padding 0
-        :clear both
-        :display block
+        padding: 0
+        clear: both
+        display: block
   .inline-hints, .inline-errors, .errors
-    :margin = 0 0 0 !floated_label_width
+    margin: 0 0 0 $floated_label_width
   input, textarea
-    :width = !floated_input_width
+    width: $floated_input_width
   select
-    @if !floated_select_width=="select-auto"
-      :width auto
+    @if $floated_select_width == "select-auto"
+      width: auto
     @else
-      :width = !floated_input_width
+      width: $floated_input_width
   .checkbox, .radio
     li
-      :display block
-      :clear both
+      display: block
+      clear: both
     input
-      :border none
+      border: none
   .buttons
-    :padding-left = !floated_label_width
-    :width = !floated_total_width - !floated_label_width
+    padding-left: $floated_label_width
+    width: $floated_total_width - $floated_label_width
     input
-      :width auto
+      width: auto
     ol
-      @if !floated_button_align == "buttons-right"
-        :padding-right = !floated_label_padding_x
+      @if $floated_button_align == "buttons-right"
+        padding-right: $floated_label_padding_x
     li
-      :width auto
-      @if !floated_button_align == "buttons-right"
-        :float right
+      width: auto
+      @if $floated_button_align == "buttons-right"
+        float: right
       @else
-        :float left
-      @if !floated_button_align == "full-buttons"
+        float: left
+      @if $floated_button_align == "full-buttons"
         input
-          :width = !floated_input_width
+          width: $floated_input_width
       @else
-        :display inline
+        display: inline
   #errorExplanation
-    :margin-left = !floated_label_width
-    :width = !floated_input_width
+    margin-left: $floated_label_width
+    width: $floated_input_width
+
 //
 //--------------------------------------------------------
 // Float Form Left/Right
 //--------------------------------------------------------
 //
-=float-form-left(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align)
-  +float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align,"left")
+=float-form-left($floated_total_width, $floated_label_width, $floated_input_width, $floated_label_padding_x, $floated_button_align)
+  +float-form($floated_total_width, $floated_label_width, $floated_input_width, $floated_label_padding_x, $floated_button_align, left)
 
-=float-form-right(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align)
-  +float-form(!floated_total_width,!floated_label_width,!floated_input_width,!floated_label_padding_x, !floated_button_align,"right")
+=float-form-right($floated_total_width, $floated_label_width, $floated_input_width, $floated_label_padding_x, $floated_button_align)
+  +float-form($floated_total_width, $floated_label_width, $floated_input_width, $floated_label_padding_x, $floated_button_align, right)
 
 //
 //--------------------------------------------------------
 // Float Inputs
 //--------------------------------------------------------
 //
-=float-inputs(!margin_right=10px,!line_height=150%)
+=float-inputs($margin_right: 10px, $line_height: 150%)
   .radio, .check_boxes
     ol
-      +inline("left")
+      +inline(left)
     li
-      :width auto
-      +inline("left","none")
+      width: auto
+      +inline(left, none)
     input
-      :float none
-      :display inline
+      float: none
+      display: inline
     label
-      :display block
-      :clear none
-      :width auto
-      :padding-left 0
-      :line-height = !line_height
-      :margin-right = !margin_right
+      display: block
+      clear: none
+      width: auto
+      padding-left: 0
+      line-height: $line_height
+      margin-right: $margin_right
+
 //
-=float-inputs-for(!dom_target,!margin_right=10px,!line_height=150%)
-  #{!dom_target}
-    +float-inputs-core(!margin_right,!line_height)
+=float-inputs-for($dom_target, $margin_right: 10px, $line_height: 150%)
+  #{$dom_target}
+    +float-inputs-core($margin_right, $line_height)
+
 //
 //--------------------------------------------------------
 // Grid Inputs
 //--------------------------------------------------------
 //
-=grid-inputs(!width=100px,!line_height=150%)
+=grid-inputs($width: 100px, $line_height: 150%)
   .radio, .check_boxes
     ol
-      +inline("left")
+      +inline(left)
     li
-      +inline("left","none")
-      :width = !width
+      +inline(left, none)
+      width: $width
     label
-      +inline("left","none")
-      :width auto
-      :line-height = !line_height
+      +inline(left, none)
+      width: auto
+      line-height: $line_height
 
-=grid-inputs-for(!dom_target,!width=100px,!line_height=150%)
-  #{!dom_target}
-    +grid-inputs-core(!width,!line_height)
+=grid-inputs-for($dom_target, $width: 100px, $line_height: 150%)
+  #{$dom_target}
+    +grid-inputs-core($width, $line_height)
 
 //--------------------------------------------------------
 // Labels
 //--------------------------------------------------------
-=bold-labels(!select="all")
+=bold-labels($select: all)
   li
-    @if !select == "all"
+    @if $select == "all"
       label, legend span.label
-        :font-weight bold
+        font-weight: bold
       li
         label
-          :font-weight normal
-    @if !select == "required"
+          font-weight: normal
+    @if $select == "required"
       &.required
         label, .label
-          :font-weight bold
+          font-weight: bold
         li
           label
-            :font-weight normal
-
+            font-weight: normal
 
 //---------------------------------------------------
 // Original Mixin (deprecated!)
 //
-!form_layout="float"
+$form_layout: float
+
 // Set the general layout of the form
 // "float" will use two column layout with labels on the left
 // "clear" will have labels above the inputs
 
 //
-!total_width=100%
+$total_width: 100%
+
 // Set width of entire fieldset
 //
 // Set label widths and hint/error left margins
-!label_width=24%
+$label_width: 24%
+
 //
-!input_width=70%
+$input_width: 70%
+
 // Set width of inputs, textareas and selects
 //
-!label_pad=2%
+$label_pad: 2%
+
 // Set horizontal padding for labels
 
 //
-!label_float="left"
+$label_float: left
+
 // Set alignment of labels
 // "clear" puts labels above inputs
 // "left" floats labels left and aligns text left
@@ -497,10 +523,12 @@
 //
 // Set widths of all inputs, textareas and selects (all aligned)
 // False will preserve auto width
-!full_width_inputs=true
+$full_width_inputs: true
+
 //
 // Set float direction of form buttons ("right" or "left")
-!button_float="left"
+$button_float: left
+
 // Installation ------------------------------------------
 //
 //$ sudo gem install haml
@@ -531,83 +559,83 @@
 // Note: When using pixel values be sure to pad total width by 10px
 // Still looking for a way to make this cleaner
 //--------------------------------------------------------
-=formtastic(!total_width,!label_width,!input_width,!label_pad,!label_float,!button_float,!full_width_inputs)
+=formtastic($total_width, $label_width, $input_width, $label_pad, $label_float, $button_float, $full_width_inputs)
   fieldset
-    :width = !total_width
+    width: $total_width
   ol li
     label
-      @if !label_float=="clear"
-        :display block
-        :clear both
-        :float none
+      @if $label_float == "clear"
+        display: block
+        clear: both
+        float: none
       @else
-        :float left
-        :width = !label_width - !label_pad
-        @if !label_float=="left"
-          :padding-left = !label_pad
-          :text-align left
+        float: left
+        width: $label_width - $label_pad
+        @if $label_float == "left"
+          padding-left: $label_pad
+          text-align: left
         @else
-          :text-align right
+          text-align: right
     fieldset
       legend
-        @if !label_float=="clear"
-          :display block
-          :clear both
-          :float none
+        @if $label_float == "clear"
+          display: block
+          clear: both
+          float: none
           span.label
-            :display block
-            :clear both
-            :float none
-
+            display: block
+            clear: both
+            float: none
         @else
-          :width = !label_width - !label_pad
-          @if !label_float=="left"
-            :padding-left = !label_pad
+          width: $label_width - $label_pad
+          @if $label_float == "left"
+            padding-left: $label_pad
           @else
-            :padding-right = !label_pad
-            :text-align right
+            padding-right: $label_pad
+            text-align: right
           span.label
-            :position absolute
-            :width = !label_width - !label_pad
+            position: absolute
+            width: $label_width - $label_pad
       ol
-        @if !label_float=="clear"
-          :padding 0
+        @if $label_float == "clear"
+          padding: 0
         @else
-          :padding =  0 ( !total_width - (!input_width + !label_width)) 0 !label_width
-    @if !label_float == "clear"
+          padding: 0 $total_width - $input_width + $label_width 0 $label_width
+    @if $label_float == "clear"
       &.string input, &.password input, &.numeric input, &.text textarea, select
-        :width = !input_width
+        width: $input_width
     @else
       p.inline-hints, p.inline-errors, ul.errors
-        :margin = 0 0 0 !label_width
-      @if !full_width_inputs
+        margin: 0 0 0 $label_width
+      @if $full_width_inputs
         &.string input, &.password input, &.numeric input, &.text textarea, select
-          :width = !input_width
+          width: $input_width
       &.boolean label
-        :padding-left = !label_width
+        padding-left: $label_width
   fieldset
     &.buttons
-      @if !label_float == "clear"
-        :width = !total_width
+      @if $label_float == "clear"
+        width: $total_width
       @else
-        :padding-left = !label_width
-        :width = !input_width
-      @if !button_float == "left"
+        padding-left: $label_width
+        width: $input_width
+      @if $button_float == "left"
         ol
           li
-            :display inline
-            :width auto
-            :float left
-      @if !button_float == "right"
+            display: inline
+            width: auto
+            float: left
+      @if $button_float == "right"
         ol
-          :padding-left 0
-          @if !label_float == "clear"
-            :width = !input_width
+          padding-left: 0
+          @if $label_float == "clear"
+            width: $input_width
           li
-            :float right
-            :width auto
-            @if !label_float != "clear"
-              :padding-left = !label_pad
+            float: right
+            width: auto
+            @if $label_float != "clear"
+              padding-left: $label_pad
+
 //--------------------------------------------------------
 // Formtastic Errors on top (aligned with label)
 //
@@ -616,13 +644,13 @@
 // Best used with right-aligned labels
 // +formtastic(100%,20%,70%,4%,"right")
 //--------------------------------------------------------
-=formtastic-errors-on-top(!label_vertical_margin=21px)
+=formtastic-errors-on-top($label_vertical_margin: 21px)
   ol li.error
     p.inline-errors
-      :margin-top 0px
+      margin-top: 0px
     label, span.label
-      :margin-top = "-#{!label_vertical_margin}"
-      :padding-bottom 18px
+      margin-top: unquote("-#{$label_vertical_margin}")
+      padding-bottom: 18px
     fieldset label
-      :margin-top 0
-      :padding-bottom 0
+      margin-top: 0
+      padding-bottom: 0
