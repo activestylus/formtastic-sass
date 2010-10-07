@@ -1,3 +1,9 @@
+h1. IMPORTANT NOTE
+
+I will no longer be supporting this particular library as I'm currently using my own custom form builders instead of formtastic. This repo will stay intact for anyone who cares to fork it.
+
+Thanks to everyone who has contributed or provided feedback. You guys rock!
+
 h1. Formtastic Sass Mixins
 
 A few simple, yet powerful macros that add flexible styling to your "Formtastic":http://github.com/justinfrench/formtastic forms.
